@@ -1,0 +1,193 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Demo By Tarun meena",
+    "description": "CRUD operation api in swagger",
+    "contact": {
+      "name": "Tarun meena",
+      "email": "meenatarun656@gmail.com",
+      "url": "http://localhost:3000/api-docs/"
+    }
+  },
+  "basepath": "/",
+  "schemes": ["http"],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "User API"
+    },
+    {
+      "name": "Posts",
+      "description": "User Post API"
+    }
+  ],
+  "paths": {
+    "/users": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get all users",
+        "description": "This api is used for getting all users.",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content":{
+              "application/json":{
+                "schema": {
+                  "$ref": "#/definitions/User"
+                } 
+              }
+             
+            }
+           
+          }
+        }
+      },
+      "post": {
+        "tags": ["Posts"],
+        "summary": "Create User",
+        "description": "User register.",
+        "operationId": "registerUser",
+        "requestBody": {
+          "description": "Enter your Info",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ok"
+          }
+        }
+      }
+    },
+    "/users/{userId}": {
+      "parameters": [
+        {
+          "name": "userId",
+          "in": "path",
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": ["Users"],
+        "summary": "Get User by  id",
+        "description": "fetch user by id",
+
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "city": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+        "put":{
+          "tags":["Users"],
+          "summary":"Update a user by id ",
+          "description":"Update a user using a user id",
+          "parameters":[{
+            "name":"userId",
+            "in":"path",
+            "type":"string"
+          }],
+          "requestBody": {
+            "description": "Enter your Info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/User"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "ok",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "city": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+      }
+      ,
+      "delete":{
+        "tags":["Users"],
+        "summary":"Delete user by id",
+        "description":"User Deleted by own id",
+        "parameters":[{
+          "name":"userId",
+          "in":"path",
+          "type":"string"
+        }],
+        "responses":{
+          "200":{
+            "description":"Deleted successfully",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/definitions/User"
+                }
+              }
+            }
+          
+        }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "city": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
+
+
